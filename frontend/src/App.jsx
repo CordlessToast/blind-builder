@@ -62,6 +62,7 @@ function App() {
 
     socket.on('error', (msg) => {
       setError(msg);
+      setTimeout(() => setError(''), 3000); // Auto hide error
     });
 
     return () => {
@@ -75,7 +76,7 @@ function App() {
 
   const handleCreateRoom = () => {
     if (!username.trim()) {
-      setError('Please enter a username first');
+      setError('ENTER USERNAME');
       return;
     }
     socket.emit('create_room', username);
@@ -83,7 +84,7 @@ function App() {
 
   const handleJoinClick = () => {
     if (!username.trim()) {
-      setError('Please enter a username first');
+      setError('ENTER USERNAME');
       return;
     }
     setShowJoinInput(true);
@@ -92,7 +93,7 @@ function App() {
 
   const submitJoinRoom = () => {
     if (!roomId.trim()) {
-      setError('Please enter a room code');
+      setError('ENTER ROOM CODE');
       return;
     }
     socket.emit('join_room', { username, roomId });
@@ -104,67 +105,67 @@ function App() {
 
   return (
     <div className="app-container">
+      <div className="version-info">v1.0.0</div>
+      
       <div className="logo-container">
         <h1 className="title">Blind Builder</h1>
-        <div className="subtitle">Co-op Puzzle Game</div>
       </div>
       
+      {error && <div className="error-message">{error}</div>}
+      
       <div className="game-area">
-        {error && <div className="error-message">{error}</div>}
-        
         {!joinedRoom ? (
           <div className="lobby">
-            <div className="input-group main-input">
+            <div className="input-group">
               <input 
                 type="text" 
-                placeholder="Enter your username" 
+                placeholder="ENTER USERNAME" 
                 value={username} 
-                onChange={(e) => setUsername(e.target.value)} 
-                className="center-text"
-                maxLength={15}
+                onChange={(e) => setUsername(e.target.value.toUpperCase())} 
+                maxLength={12}
               />
             </div>
             
             {!showJoinInput ? (
               <div className="action-buttons">
-                <button className="btn primary" onClick={handleCreateRoom}>Create Room</button>
-                <button className="btn secondary" onClick={handleJoinClick}>Join Room</button>
+                <button className="btn primary" onClick={handleCreateRoom}>Host Game</button>
+                <button className="btn secondary" onClick={handleJoinClick}>Join Game</button>
               </div>
             ) : (
-              <div className="join-section slide-in">
+              <div className="join-section">
                 <div className="input-group">
                   <input 
                     type="text" 
-                    placeholder="Enter Room Code" 
+                    placeholder="ROOM CODE" 
                     value={roomId} 
-                    onChange={(e) => setRoomId(e.target.value)} 
-                    className="center-text room-code-input"
+                    onChange={(e) => setRoomId(e.target.value.toUpperCase())} 
+                    className="room-code-input"
                     maxLength={10}
                   />
                 </div>
                 <div className="action-buttons">
-                  <button className="btn primary" onClick={submitJoinRoom}>Join</button>
-                  <button className="btn secondary" onClick={() => setShowJoinInput(false)}>Cancel</button>
+                  <button className="btn primary" onClick={submitJoinRoom}>Connect</button>
+                  <button className="btn secondary" onClick={() => setShowJoinInput(false)}>Back</button>
                 </div>
               </div>
             )}
           </div>
         ) : gameStatus === 'lobby' ? (
-          <div className="room slide-in">
+          <div className="room">
             <div className="room-header">
-              <h2>Room Code: <span className="highlight-code">{joinedRoom}</span></h2>
-              <p>Welcome, <strong>{username}</strong>!</p>
+              <h2>ROOM: <span className="highlight-code">{joinedRoom}</span></h2>
+              <p>PLAYER: {username}</p>
             </div>
             
             <div className="players-section">
-              <h3>👥 Players in Room ({players.length}/2)</h3>
+              <h3>PLAYERS ({players.length}/2)</h3>
               <ul className="player-list">
                 {players.map((player, index) => (
                   <li key={index} className="player-item">
                     <div className="player-avatar">
                       {player.charAt(0).toUpperCase()}
                     </div>
-                    <span className="player-name">{player} {isLeader && index === 0 ? '(Leader)' : ''}</span>
+                    <span className="player-name">{player} {isLeader && index === 0 ? '[HOST]' : ''}</span>
                   </li>
                 ))}
               </ul>
@@ -173,51 +174,77 @@ function App() {
             {players.length < 2 ? (
               <div className="waiting-container">
                 <div className="spinner"></div>
-                <p className="waiting-text">Waiting for other players to join...</p>
+                <p className="waiting-text">WAITING FOR PLAYERS...</p>
               </div>
             ) : (
-              <div className="ready-container slide-in">
-                <p className="ready-text">All players are here!</p>
+              <div className="ready-container">
+                <p className="ready-text">LOBBY FULL</p>
                 {isLeader ? (
-                  <button className="btn primary start-btn" onClick={startGame}>Start Game</button>
+                  <button className="btn primary start-btn" onClick={startGame}>START MATCH</button>
                 ) : (
-                  <p className="waiting-text">Waiting for leader to start the game...</p>
+                  <p className="waiting-text">WAITING FOR HOST...</p>
                 )}
               </div>
             )}
           </div>
         ) : gameStatus === 'countdown' ? (
-          <div className="countdown-screen slide-in">
-            <h2>Game starting in</h2>
+          <div className="countdown-screen">
+            <h2>MATCH STARTING IN</h2>
             <div className="countdown-number">{countdown}</div>
           </div>
         ) : gameStatus === 'loading' ? (
-          <div className="loading-screen slide-in">
+          <div className="loading-screen">
             <div className="spinner large-spinner"></div>
-            <h2>Preparing Game...</h2>
+            <h2>LOADING MAP...</h2>
           </div>
         ) : gameStatus === 'role_reveal' ? (
-          <div className="role-reveal-screen slide-in">
-            <h2>Your Role</h2>
-            <div className={`role-card ${myRole.toLowerCase()}`}>
-              <div className="role-icon">{myRole === 'Guide' ? '👁️' : '🔨'}</div>
-              <div className="role-name">{myRole}</div>
+          <div className="role-reveal-screen">
+            <div className="role-card">
+              <h2>YOUR ROLE</h2>
+              <p className="role-name">{myRole}</p>
+              <p className="role-desc">
+                {myRole === 'Guide' 
+                  ? 'Direct the Builder to complete the structure.' 
+                  : 'Listen to the Guide and build the structure.'}
+              </p>
             </div>
-            <p className="role-desc">
-              {myRole === 'Guide' 
-                ? 'You can see the final picture. Guide the Builder!' 
-                : 'You cannot see the picture. Listen to the Guide and build!'}
-            </p>
           </div>
         ) : (
-          <div className="playing-screen slide-in">
+          <div className="playing-screen">
             <div className="game-header">
-              <div className="role-badge">{myRole === 'Guide' ? '👁️ Guide' : '🔨 Builder'}</div>
-              <div className="room-badge">Room: {joinedRoom}</div>
+              <h2>ROLE: <span className="highlight-role">{myRole}</span></h2>
             </div>
-            <div className="game-board-empty">
-              <h3>Game Board</h3>
-              <p>Game implementation goes here...</p>
+            
+            <div className="game-board-container">
+              {myRole === 'Builder' ? (
+                <div className="builder-view">
+                  <h3>YOUR CANVAS</h3>
+                  <div className="grid-4x4">
+                    {Array.from({ length: 16 }).map((_, i) => (
+                      <div key={i} className="grid-cell"></div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="guide-view">
+                  <div className="guide-grid-container">
+                    <h3>TARGET DESIGN</h3>
+                    <div className="grid-4x4 target-grid">
+                      {Array.from({ length: 16 }).map((_, i) => (
+                        <div key={i} className="grid-cell"></div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="guide-grid-container">
+                    <h3>BUILDER'S CANVAS</h3>
+                    <div className="grid-4x4 builder-progress-grid">
+                      {Array.from({ length: 16 }).map((_, i) => (
+                        <div key={i} className="grid-cell"></div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

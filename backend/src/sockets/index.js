@@ -19,7 +19,7 @@ const setupSockets = (server) => {
     };
 
     socket.on("create_room", (username) => {
-      const roomId = Math.random().toString(36).substring(7);
+      const roomId = Math.random().toString(36).substring(2, 8).toUpperCase();
       socket.join(roomId);
       socket.username = username; 
       socket.roomId = roomId;    
