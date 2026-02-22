@@ -80,7 +80,6 @@ body {
   position: relative;
 }
 
-/* Lobby & Room Panels */
 .lobby, .room {
   background: rgba(0, 0, 0, 0.4);
   padding: 50px;
@@ -203,7 +202,6 @@ body {
   75% { transform: translateX(-10px); }
 }
 
-/* Room Styles */
 .room-header {
   text-align: center;
   margin-bottom: 30px;
@@ -295,7 +293,6 @@ body {
   flex-grow: 1;
 }
 
-/* Game Flow Styles */
 .ready-container {
   margin-top: 30px;
   width: 100%;

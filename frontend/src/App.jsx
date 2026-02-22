@@ -54,8 +54,8 @@ function App() {
             
             setTimeout(() => {
               setGameStatus('playing');
-            }, 3000); // Show role for 3 seconds
-          }, 2000); // 2 seconds loading
+            }, 3000); 
+          }, 2000); 
         }
       }, 1000);
     });
