@@ -1,13 +1,22 @@
+const { Socket } = require("socket.io");
+
 const rooms = {};
 
 function createRoom(roomId, socket, username) {
   rooms[roomId] = {
+    host: socket.id,
     players: [
       { socketId: socket.id, username }
     ],
-    started: false,
     roles: {},
-    gameState: {}
+    game: {
+      status: "waiting",
+      score: 0,
+      round: 0,
+      word: "",
+      symbolMap: null,
+      timeLeft: 120
+    }
   };
 }
 
@@ -42,10 +51,17 @@ function removePlayer(socketId) {
   }
 }
 
+const getPlayersInRoom = (roomId) => {
+  const room = rooms[roomId];
+  if (!room) return [];
+  return room.players.map(p => p.username);
+};
+
 module.exports = {
   rooms,
   createRoom,
   joinRoom,
   assignRoles,
-  removePlayer
+  removePlayer,
+  getPlayersInRoom
 };

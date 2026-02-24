@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { socket } from './socket';
+import { playerConnection } from './playerConnection';
 import './App.css';
 
 function App() {
@@ -11,30 +11,30 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [showJoinInput, setShowJoinInput] = useState(false);
   const [isLeader, setIsLeader] = useState(false);
-  const [gameStatus, setGameStatus] = useState('lobby'); // lobby, countdown, loading, role_reveal, playing
+  const [gameStatus, setGameStatus] = useState('lobby'); 
   const [countdown, setCountdown] = useState(5);
   const [myRole, setMyRole] = useState('');
 
   useEffect(() => {
-    socket.on('room_created', (id) => {
+    playerConnection.on('room_created', (id) => {
       setJoinedRoom(id);
       setIsInLobby(false);
       setIsLeader(true);
       setError('');
     });
 
-    socket.on('room_joined', (id) => {
+    playerConnection.on('room_joined', (id) => {
       setJoinedRoom(id);
       setIsInLobby(false);
       setIsLeader(false);
       setError('');
     });
 
-    socket.on('update_players', (playerList) => {
+    playerConnection.on('update_players', (playerList) => {
       setPlayers(playerList);
     });
 
-    socket.on('game_starting', (roles) => {
+    playerConnection.on('game_starting', (roles) => {
       setMyRole(roles[username]);
       setGameStatus('countdown');
       
@@ -60,17 +60,17 @@ function App() {
       }, 1000);
     });
 
-    socket.on('error', (msg) => {
+    playerConnection.on('error', (msg) => {
       setError(msg);
       setTimeout(() => setError(''), 3000); // Auto hide error
     });
 
     return () => {
-      socket.off('room_created');
-      socket.off('room_joined');
-      socket.off('update_players');
-      socket.off('game_starting');
-      socket.off('error');
+      playerConnection.off('room_created');
+      playerConnection.off('room_joined');
+      playerConnection.off('update_players');
+      playerConnection.off('game_starting');
+      playerConnection.off('error');
     };
   }, [username]);
 
@@ -79,7 +79,7 @@ function App() {
       setError('ENTER USERNAME');
       return;
     }
-    socket.emit('create_room', username);
+    playerConnection.emit('create_room', username);
   };
 
   const handleJoinClick = () => {
@@ -96,11 +96,11 @@ function App() {
       setError('ENTER ROOM CODE');
       return;
     }
-    socket.emit('join_room', { username, roomId });
+    playerConnection.emit('join_room', { username, roomId });
   };
 
   const startGame = () => {
-    socket.emit('start_game', joinedRoom);
+    playerConnection.emit('start_game', joinedRoom);
   };
 
   return (
