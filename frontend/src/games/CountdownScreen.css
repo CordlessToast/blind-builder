@@ -1,0 +1,24 @@
+.countdown-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.countdown-screen h2 {
+  font-size: var(--font-size-huge);
+  margin: 0;
+  color: var(--color-text);
+  text-shadow: 3px 3px 0 var(--color-darker);
+}
+
+.countdown-number {
+  font-size: var(--font-size-colossal);
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+  text-shadow: 8px 8px 0 var(--color-darker);
+  animation: pulse 1s infinite;
+}

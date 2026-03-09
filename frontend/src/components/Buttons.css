@@ -1,0 +1,59 @@
+.btn {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: none;
+  font-size: var(--font-size-lg);
+  cursor: pointer;
+  font-weight: 700;
+  font-family: var(--font-family);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn.primary {
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+  border-bottom: var(--border-width-normal) solid #c89a24;
+}
+
+.btn.primary:hover {
+  background-color: #fdd835;
+  transform: translateY(-2px);
+}
+
+.btn.primary:active {
+  transform: translateY(2px);
+  border-bottom: 0px;
+  margin-top: var(--border-width-normal);
+}
+
+.btn.secondary {
+  background-color: var(--color-border);
+  color: var(--color-text);
+  border-bottom: var(--border-width-normal) solid var(--color-dark);
+}
+
+.btn.secondary:hover {
+  background-color: var(--color-border-light);
+  transform: translateY(-2px);
+}
+
+.btn.secondary:active {
+  transform: translateY(2px);
+  border-bottom: 0px;
+  margin-top: var(--border-width-normal);
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
+.start-btn {
+  margin-top: var(--spacing-md);
+}

@@ -1,0 +1,38 @@
+.role-reveal-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.role-card {
+  background: var(--color-card);
+  padding: var(--spacing-xxl) var(--spacing-xxxl);
+  border: var(--border-width-normal) solid var(--color-border-light);
+  border-top: var(--border-width-thicker) solid var(--color-primary);
+  text-align: center;
+  box-shadow: var(--shadow-large);
+  transform: skewX(-2deg);
+}
+
+.role-card h2 {
+  font-size: var(--font-size-xxl);
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--color-text-muted);
+}
+
+.role-name {
+  font-size: var(--font-size-giant);
+  color: var(--color-primary);
+  margin: 0 0 var(--spacing-lg) 0;
+  line-height: 1;
+  text-shadow: 4px 4px 0 var(--color-darker);
+}
+
+.role-desc {
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  margin: 0;
+}

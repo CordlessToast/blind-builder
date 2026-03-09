@@ -1,0 +1,15 @@
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loading-screen h2 {
+  font-size: var(--font-size-xxl);
+  color: var(--color-text);
+  text-shadow: 2px 2px 0 var(--color-darker);
+  margin-top: var(--spacing-lg);
+}

@@ -1,0 +1,49 @@
+.grid-4x4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 5px;
+  background-color: var(--color-border);
+  padding: var(--spacing-sm);
+  border: var(--border-width-normal) solid var(--color-border-light);
+  box-shadow: var(--shadow-medium);
+  transform: skewX(-2deg);
+}
+
+.builder-view .grid-4x4 {
+  width: 500px;
+  height: 500px;
+}
+
+.guide-view .grid-4x4 {
+  width: 350px;
+  height: 350px;
+}
+
+.grid-cell {
+  background-color: var(--color-bg);
+  border: var(--border-width-thin) solid var(--color-card);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.builder-view .grid-cell:hover {
+  background-color: var(--color-card);
+  border-color: var(--color-primary);
+}
+
+.target-grid {
+  border-color: var(--color-success);
+}
+
+.target-grid .grid-cell {
+  cursor: default;
+}
+
+.builder-progress-grid {
+  border-color: var(--color-info);
+}
+
+.builder-progress-grid .grid-cell {
+  cursor: default;
+}

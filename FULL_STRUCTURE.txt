@@ -1,0 +1,136 @@
+COMPLETE FOLDER STRUCTURE
+=========================
+
+blind-builder/
+│
+└── frontend/
+    ├── package.json
+    ├── index.html
+    ├── vite.config.js
+    ├── eslint.config.js
+    ├── README.md
+    ├── STRUCTURE_GUIDE.txt ............ JavaScript/Component structure guide
+    ├── CSS_GUIDE.txt ................. CSS structure and variables guide
+    │
+    └── src/
+        ├── main.jsx .................. App entry point
+        ├── App.jsx ................... Main app component (wrapper)
+        ├── App.css ................... CSS imports only (no actual styles)
+        ├── index.css ................. Reset/normalize styles
+        ├── socket.js ................. Socket.io connection setup
+        │
+        ├── context/
+        │   └── GameContext.jsx ........ Shared game state
+        │
+        ├── hooks/
+        │   ├── useSocketListeners.js .. Socket event handlers
+        │   └── useGameActions.js ...... User action handlers
+        │
+        ├── components/
+        │   ├── Header.jsx ............ Logo and title
+        │   ├── ErrorMessage.jsx ...... Error notifications
+        │   ├── UsernameInput.jsx ..... Username input field
+        │   ├── RoomCodeInput.jsx ..... Room code input field
+        │   ├── Buttons.jsx .......... Reusable buttons
+        │   ├── PlayerList.jsx ....... Players list component
+        │   └── Spinner.jsx ......... Loading spinner
+        │
+        ├── pages/
+        │   ├── LobbyPage.jsx ........ Start screen
+        │   └── RoomPage.jsx ........ Room waiting screen
+        │
+        ├── games/
+        │   ├── CountdownScreen.jsx ... Countdown timer
+        │   ├── LoadingScreen.jsx ..... Loading animation
+        │   ├── RoleRevealScreen.jsx .. Role reveal card
+        │   ├── PlayingScreen.jsx .... Game main screen
+        │   ├── BuilderView.jsx ...... Builder side view
+        │   ├── GuideView.jsx ........ Guide side view
+        │   └── GameGrid.jsx ........ 4x4 grid component
+        │
+        ├── styles/
+        │   ├── variables.css ........ CSS variables (colors, sizes)
+        │   ├── animations.css ....... Keyframes
+        │   ├── global.css .......... Body and base styles
+        │   │
+        │   ├── components/
+        │   │   ├── Header.css
+        │   │   ├── Buttons.css
+        │   │   ├── Inputs.css
+        │   │   ├── ErrorMessage.css
+        │   │   ├── Spinner.css
+        │   │   └── PlayerList.css
+        │   │
+        │   ├── pages/
+        │   │   ├── LobbyPage.css
+        │   │   └── RoomPage.css
+        │   │
+        │   └── games/
+        │       ├── CountdownScreen.css
+        │       ├── LoadingScreen.css
+        │       ├── RoleRevealScreen.css
+        │       ├── PlayingScreen.css
+        │       └── GameBoard.css
+        │
+        ├── assets/ ............... Images and media (empty for now)
+        ├── services/ ............ Utility functions (empty for now)
+        └── hooks/ ............... More custom hooks (will have useSocketListeners.js)
+
+
+HOW THE CSS LOADS IN ORDER
+==========================
+
+1. variables.css ........... Define all colors and sizes
+   ↓
+2. animations.css ......... Define animations that other files use
+   ↓
+3. global.css ............ Body styles, app container
+   ↓
+4. components/*.css ....... Component specific styles
+   ↓
+5. pages/*.css ........... Page specific styles
+   ↓
+6. games/*.css .......... Game screen styles
+
+This order matters! Variables must load first so other files can use them.
+
+
+FILE NAMING CONVENTION
+=====================
+
+JavaScript Files:
+  ✓ PascalCase for components: Header.jsx, LobbyPage.jsx
+  ✓ camelCase for hooks/utilities: useSocketListeners.js, useGameActions.js
+  ✓ camelCase for files in services/utils: socketConfig.js
+
+CSS Files:
+  ✓ PascalCase matching component names: Header.css, LobbyPage.css
+  ✓ Use simple descriptive names: variables.css, global.css, animations.css
+  ✓ Special files: variables.css, global.css, animations.css (always lowercase)
+
+This way, finding styles is easy - component styles match component names!
+
+
+QUICK REFERENCE
+===============
+
+Need to style a new button?
+  → Add CSS to: styles/components/Buttons.css
+  → Or create new file: styles/components/NewComponent.css
+
+Need to change all primary colors?
+  → Edit: styles/variables.css
+  → Change: --color-primary: #fbc02d;
+
+Need animation timing?
+  → Edit: styles/variables.css
+  → Change: --transition-normal: 0.2s;
+
+Need to debug spacing?
+  → All spacing values are in: styles/variables.css
+  → Look for: --spacing-*
+
+Running into CSS conflicts?
+  → Check: styles/global.css
+  → Check: styles/components/
+  → Check relevant page or game file

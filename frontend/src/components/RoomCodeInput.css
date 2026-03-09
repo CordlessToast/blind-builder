@@ -1,0 +1,34 @@
+.input-group {
+  width: 100%;
+  margin-bottom: var(--spacing-lg);
+}
+
+.input-group input {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: var(--border-width-thin) solid var(--color-border-light);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--color-text);
+  font-size: 1.8rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  text-align: center;
+  transition: all var(--transition-normal);
+}
+
+.input-group input:not([type="email"]) {
+  text-transform: uppercase;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: rgba(20, 20, 20, 0.9);
+}
+
+.room-code-input {
+  letter-spacing: 5px;
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
