@@ -1,0 +1,64 @@
+.room {
+  background: rgba(20, 20, 20, 0.85);
+  padding: var(--spacing-xxl);
+  width: 400px;
+  border: var(--border-width-normal) solid var(--color-border);
+  border-left: var(--border-width-thick) solid var(--color-primary);
+  box-shadow: var(--shadow-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: skewX(-2deg);
+}
+
+.room-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  width: 100%;
+  border-bottom: var(--border-width-thin) solid var(--color-border);
+  padding-bottom: var(--spacing-sm);
+}
+
+.room-header h2 {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  color: var(--color-text-muted);
+}
+
+.highlight-code {
+  color: var(--color-primary);
+  font-size: var(--font-size-xxl);
+}
+
+.room-header p {
+  margin: var(--spacing-xs) 0 0 0;
+  font-size: var(--font-size-sm);
+}
+
+.players-section {
+  width: 100%;
+  margin-bottom: var(--spacing-lg);
+}
+
+.players-section h3 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: var(--font-size-md);
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.waiting-container,
+.ready-container {
+  text-align: center;
+  width: 100%;
+}
+
+.waiting-text,
+.ready-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.ready-text {
+  color: var(--color-success);
+}

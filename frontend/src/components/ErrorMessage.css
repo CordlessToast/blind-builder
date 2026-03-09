@@ -1,0 +1,14 @@
+.error-message {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-error);
+  color: var(--color-text);
+  padding: 10px 30px;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border: var(--border-width-thin) solid var(--color-error-dark);
+  box-shadow: var(--shadow-small);
+  z-index: 100;
+}

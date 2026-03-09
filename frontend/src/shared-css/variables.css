@@ -1,0 +1,48 @@
+:root {
+  --color-primary: #fbc02d;
+  --color-dark: #111;
+  --color-darker: #000;
+  --color-bg: #1a1a1a;
+  --color-card: #222;
+  --color-border: #333;
+  --color-border-light: #444;
+  --color-text: #fff;
+  --color-text-muted: #aaa;
+  --color-error: #d32f2f;
+  --color-error-dark: #b71c1c;
+  --color-success: #4caf50;
+  --color-info: #2196f3;
+
+  --font-family: 'Teko', sans-serif;
+  --font-size-xs: 1.2rem;
+  --font-size-sm: 1.5rem;
+  --font-size-md: 1.8rem;
+  --font-size-lg: 2rem;
+  --font-size-xl: 2.5rem;
+  --font-size-xxl: 3rem;
+  --font-size-huge: 4rem;
+  --font-size-massive: 5rem;
+  --font-size-giant: 6rem;
+  --font-size-colossal: 15rem;
+
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 30px;
+  --spacing-xxl: 40px;
+  --spacing-xxxl: 80px;
+
+  --border-width-thin: 2px;
+  --border-width-normal: 4px;
+  --border-width-thick: 8px;
+  --border-width-thicker: 10px;
+
+  --shadow-small: 5px 5px 0px rgba(0, 0, 0, 0.5);
+  --shadow-medium: 10px 10px 0px rgba(0, 0, 0, 0.5);
+  --shadow-large: 15px 15px 0 rgba(0, 0, 0, 0.8);
+
+  --transition-fast: 0.1s;
+  --transition-normal: 0.2s;
+  --transition-smooth: 1s;
+}
