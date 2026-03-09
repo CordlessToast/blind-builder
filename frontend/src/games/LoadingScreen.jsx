@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { GameContext } from '../context/GameContext';
+import React from 'react';
 import { Spinner } from '../components/Spinner';
 
 export function LoadingScreen() {

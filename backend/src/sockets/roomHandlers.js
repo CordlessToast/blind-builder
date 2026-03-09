@@ -2,7 +2,7 @@ const { rooms, createRoom, joinRoom, removePlayer } = require("../services/roomS
 
 module.exports = (gameServer, playerConnection, getPlayersInRoom) => {
     playerConnection.on("create_room", (username) => {
-        const roomId = Math.random().toString(36).substring(2, 8).toUpperCase();
+        const roomId = Math.random().toString(10).substring(2, 6).toUpperCase();
         playerConnection.join(roomId);
         playerConnection.username = username;
         playerConnection.roomId = roomId;

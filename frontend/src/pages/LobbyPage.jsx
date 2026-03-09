@@ -6,7 +6,7 @@ import { RoomCodeInput } from '../components/RoomCodeInput';
 import { useGameActions } from '../hooks/useGameActions';
 
 export function LobbyPage() {
-  const { username, setUsername, roomId, setRoomId, showJoinInput } = useContext(GameContext);
+  const { username, setUsername, roomId, setRoomId, showJoinInput, setShowJoinInput } = useContext(GameContext);
   const { handleCreateRoom, handleJoinClick, submitJoinRoom } = useGameActions();
 
   return (
